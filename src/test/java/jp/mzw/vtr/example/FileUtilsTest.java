@@ -42,5 +42,24 @@ public class FileUtilsTest {
 			// expected
 		}
 	}
+
+	@Test
+	public void testGetFiles() {
+		ArrayList<File> files = FileUtils.getFiles(new File("src"));
+		File file = new File("src/test/resources", "alice.txt");
+		assertTrue(files.contains(file));
+	}
+	
+	@Test
+	public void testGetFilesFalseNegative() {
+		ArrayList<File> files = FileUtils.getFiles(new File("src"));
+		File file = new File("src/test/resources", "wonderland.txt");
+		assertFalse(files.contains(file));
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testGetFilesWithInvalidDirectory() {
+		FileUtils.getFiles(new File("foo"));
+	}
 	
 }

@@ -20,5 +20,14 @@ public class FileUtils {
 		br.close();
 		return ret;
 	}
+
+	public static ArrayList<File> getFiles(File dir) {
+		ArrayList<File> ret = new ArrayList<File>();
+		for(File file : dir.listFiles()) {
+			if(file.isFile()) ret.add(file);
+			else if(file.isDirectory()) ret.addAll(getFiles(file));
+		}
+		return ret;
+	}
 	
 }
