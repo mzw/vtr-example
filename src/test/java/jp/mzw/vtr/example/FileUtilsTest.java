@@ -31,16 +31,11 @@ public class FileUtilsTest {
 			fail("File do not exist");
 		}
 	}
-	
-	@Test
-	public void testNonExistFile() {
+
+	@Test(expected=IOException.class)
+	public void testNonExistFile() throws IOException {
 		File file = new File("src/test/resources", "wonderland.txt");
-		try {
-			FileUtils.grep(file, "it's no use going back to yesterday");
-			fail("Unexpectedly file exist");
-		} catch (IOException e) {
-			// expected
-		}
+		FileUtils.grep(file, "it's no use going back to yesterday");
 	}
 
 	@Test
